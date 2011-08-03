@@ -27,6 +27,119 @@ typedef struct {
 	HINSTANCE hDllInst;
 } LA_GenPluginInfoStruct;
 
+  // Audio stream structure of file info.
+typedef struct {
+	int     aID;                // 0
+	int     aStreamKindID;
+	int     aMenuID;
+	bool    aCover;
+	__int64 aDur;
+	char    *aMenuIDStr;
+	char    *aTitle;            // Name of the track.
+	char    *aPlayTime;         // "1h 40mn"
+	char    *aFormat;           // MPEG-1 Audio Layer 3
+	char    *aFormatProfile;
+	char    *aFormatInfo;
+	char    *aCodecID;
+	char    *aBitRate;          // 106 Kbps
+	char    *aBitRateMode;      // VBR
+	char    *aChannels;         // "2 channels"
+	char    *aChannelsPos;      // "Front: L C R, Rear: L R, Subwoofer" (for DVD)
+	char    *aSampleRate;       // "48 kHz"
+	char    *aStreamSizeStr;
+	char    *aEncodedBy;        // "Lame 3.93"
+	char    *aLanguage;         // "English"
+	char    *aCoverDesc;
+	char    *aCoverType;        // "Cover (front)"
+	char    *aCoverMime;        // "image/jpg"
+	char    *aCoverData;        // Base64 encoded cover data.
+} RAudioStream;
+
+  // Language & Subtitles stream of file info.
+typedef struct {
+	char *sID;          // "0"
+	char *sLang;        // "Russian".
+	char *sFormat;      // "UTF-8"
+	char *sCodec;       // "S_TEXT/UTF8"
+	char *sCodecInfo;   // "UTF-8 Plain Text"
+	char *sVideoDelay;  // "3s 86ms"
+	char *sTitle;       // "SRT"
+} RLanguageStream;
+
+// File info structure.
+typedef struct {
+    // System info.
+    char     *PathFileName;  // Path + file name.
+    char     *FileName;      // Just file name.
+    __int64  FileSize;       // >2GB (I hope, at least).
+    __int64  Duration;       // Йобаная четверка...
+    char     *FilePlaytime;  // "1h 56mn"
+    char     *FileOverallBtr;   // Overall bitrate, "2 911 kbps"
+    char     *FileOverallBtrMd;// Bitrate mode.
+    char     *FileOverallBtrMn; // Minimum bitrate.
+    char     *FileOverallBtrNm; // Nominal bitrate.
+    char     *FileOverallBtrMx; // Maximum bitrate.
+    char     *FileFormat;       // ".avi"
+    char     *FileFormatURL;
+    char     *FileFormatExts;   // Known extensions of format
+    char     *FileFormatDesc;   // "Audio Video Interleave"
+    char     *FileEncDate;      // "UTC 2010-02-23 19:49:51"
+    char     *FileEncApp;       // "mkvmerge v3.1.0 built on Jan 19 2010 12:09:24"
+    char     *FileEncLib;       // "libeml v0.7.9 + libmatroska v0.8.1"
+    char     *FileEncAuthor;
+    char     *Hash64k;          // !!!
+
+    char     *genTitle;
+    char     *genArtist;
+
+    // Playlist specified.
+    bool     IsBroken;          // File is not exist, not accessible, broken, etc.
+    bool     InfoAlreadyFilled; // DevNote: Чтобы съэкономить время.
+
+    // Basic info for all files (video + audio)
+    bool     HasVideo;
+    bool     HasAudio;
+    bool     HasSubs;
+    bool     HasMenu;
+    int      VideoCount;
+    int      AudioCount;
+    int      LangsCount;
+    int      MenuCount;         // Internal subtitles (mkv, dvd)
+
+    // DVD
+    bool     IsDVD;
+
+    int      vID;               // "1"
+    int      vWidth;
+    int      vHeight;
+    __int64  vDur;
+    char     *vPlayTime;        // "1h 35mn"
+    char     *vFormat;          // "AVC"
+    char     *vFormatInfo;      //"Advanced Video Codec"
+    char     *vFormatProfile;   // "High@L5.0"
+    char     *vCodecID;         // "V_MPEG_4/ISO/AVC"
+    char     *vCodecIDHint;
+    char     *vCodecIDVersion;
+    char     *vAspectRatio;     // 4:3
+    char     *vFrameRate;       // 25.000 fps
+    char     *vBitRate;         // 891 Kbps
+    char     *vBitRateMn;
+    char     *vBitRateMx;
+    char     *vBitRateMd;       // "VBR"
+    char     *vStandard;        // "PAL" (for DVD)
+    char     *vColorSpace;      // "YUV"
+    char     *vScantype;        // "Progressive"
+    char     *vBits;            // (Pixel * Frame), "0.110"
+    char     *vStreamSize;
+    char     *vEncodedBy;
+    char     *vWritingLibrary;
+    char     *vEncodingSettings;
+    char     *vTitle;
+		
+	RLanguageStream *LStreams;  //array of RLanguageStream
+	RAudioStream    *AStreams;  //array of RAudioStream
+} TNfoEntry;
+
 
 // РАСШИФРОВКА ПРЕФИКСА:
 // LAG = Light Alloy Get - возвращает значение -- строковое либо числовое.
