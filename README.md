@@ -64,4 +64,4 @@ _LANGRU.txt_
 
 
 #### 6. Build
-#### 7. Move Plugin.dll and MYPREFS.xml (must be renamed to Test.xml) in Light-Alloy\plugin
+#### 7. Move Plugin.dll and MYPREFS.xml (must be renamed to Test.xml) in Light-Alloy\Plugins\General
