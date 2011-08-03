@@ -11,20 +11,20 @@
 
 //Основная структура передаваемая в плеер при инициализации
 typedef struct {
-	char     *version;
-	char     *name;
-	char     *description;
-	char     *AppData_Dir;  
-    char     *LogFile_Name;
-    char     *PrefsFile_Name;
-    char     *DLLName;
-    int       SDK_MIN_VER;     // Минимально требуемая версия плагиновой архитектуры (LA v4.6 = 0x10).
-    int       hasOptions;      // Плагин имеет настройки (0 - нет, 1 - да)?
-    int       (*InitProc)();
+	char      *version;
+	char      *name;
+	char      *description;
+	char      *AppData_Dir;  
+	char      *LogFile_Name;
+	char      *PrefsFile_Name;
+	char      *DLLName;
+	int       SDK_MIN_VER;     // Минимально требуемая версия плагиновой архитектуры (LA v4.6 = 0x10).
+	int       hasOptions;      // Плагин имеет настройки (0 - нет, 1 - да)?
+	int       (*InitProc)();
 	void      (*ConfigProc)();
-    void      (*QuitProc)();
-    HWND      hwndParent;
-    HINSTANCE hDllInst;
+	void      (*QuitProc)();
+	HWND      hwndParent;
+	HINSTANCE hDllInst;
 } LA_GenPluginInfoStruct;
 
 
